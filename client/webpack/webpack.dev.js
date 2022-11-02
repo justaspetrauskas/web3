@@ -1,11 +1,11 @@
 // specific to development enviroment
-const webpack = require("webpack");
+const webpack = require('webpack')
 // hot model replacement for updating only modified components
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 module.exports = {
-  mode: "development",
-  devtool: "cheap-module-source-map",
+  mode: 'development',
+  devtool: 'cheap-module-source-map',
   devServer: {
     hot: true,
     open: true,
@@ -13,7 +13,7 @@ module.exports = {
   plugins: [
     new ReactRefreshWebpackPlugin(),
     new webpack.DefinePlugin({
-      "process.env.name": JSON.stringify("Justas"),
+      'process.env.name': JSON.stringify('Justas'),
     }),
   ],
-};
+}

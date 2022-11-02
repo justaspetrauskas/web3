@@ -1,6 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
+// const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   // entry for the application
@@ -18,13 +18,17 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
           },
         ],
       },
       {
         // css loader
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.css$/i,
+        include: path.resolve(__dirname, 'src'),
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
         // file loader
@@ -41,7 +45,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '..', './build'),
     filename: 'bundle.js',
-    assetModuleFilename: '/assets/[name][ext]',
+    assetModuleFilename: 'assets/[name][ext]',
     clean: true,
   },
 
@@ -51,9 +55,9 @@ module.exports = {
       template: path.resolve(__dirname, '..', './src/index.html'),
     }),
     // allows to copy static assets to the build directory
-    new CopyPlugin({
-      patterns: [{ from: 'source', to: 'dest' }],
-    }),
+    // new CopyPlugin({
+    //   patterns: [{ from: 'source', to: 'dest' }],
+    // }),
   ],
   stats: 'errors-only',
 }
