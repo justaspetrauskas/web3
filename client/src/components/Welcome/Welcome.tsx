@@ -1,28 +1,30 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { AiFillPlayCircle } from 'react-icons/ai'
 import { SiEthereum } from 'react-icons/si'
 import { BsInfoCircle } from 'react-icons/bs'
 
 import Loader from '../Loader/Loader'
 import Input from './Input'
+import { TransactionContext } from '../../context/TransactionContext'
 
 const commonStyles =
   'min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white'
 
 const Welcome = () => {
-  const connectWallet = () => {}
+  const {
+    currentAccount,
+    connectWallet,
+    handleChange,
+    sendTransaction,
+    formData,
+    isLoading,
+  } = useContext(TransactionContext)
 
   const handleSubmit = (e) => {
     // const { addressTo, amount, keyword, message } = formData;
     // e.preventDefault();
     // if (!addressTo || !amount || !keyword || !message) return;
     // // sendTransaction();
-  }
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    name: string
-  ) => {
-    console.log(name)
   }
 
   return (
@@ -53,7 +55,7 @@ const Welcome = () => {
             <div className={`rounded-none sm:rounded-bl-2xl ${commonStyles}`}>
               Web 3.0
             </div>
-            <div className={`ms:rounded-none rounded-bl-2xl ${commonStyles}`}>
+            <div className={`sm:rounded-none rounded-bl-2xl ${commonStyles}`}>
               Low Fees
             </div>
             <div className={`rounded-br-2xl ${commonStyles}`}>Blockchain</div>

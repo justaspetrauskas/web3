@@ -1,4 +1,14 @@
-import ReactDOM from 'react-dom'
 import { App } from './App'
 
-ReactDOM.render(<App />, document.getElementById('root') as HTMLElement)
+import { createRoot } from 'react-dom/client'
+const container = document.getElementById('root')
+const root = createRoot(container!)
+
+import './style.css'
+import { TransactionProvider } from './context/TransactionContext'
+
+root.render(
+  <TransactionProvider>
+    <App />
+  </TransactionProvider>
+)

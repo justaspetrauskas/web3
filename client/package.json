@@ -15,10 +15,13 @@
   "license": "ISC",
   "dependencies": {
     "-": "^0.0.1",
+    "@metamask/detect-provider": "^2.0.0",
+    "@metamask/providers": "^10.2.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.8",
     "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10.4.13",
     "D": "^1.0.0",
+    "ethereum-types": "^3.7.1",
     "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
