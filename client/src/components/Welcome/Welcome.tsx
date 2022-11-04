@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { useEthers, useEtherBalance } from '@usedapp/core'
 import { AiFillPlayCircle } from 'react-icons/ai'
 import { SiEthereum } from 'react-icons/si'
 import { BsInfoCircle } from 'react-icons/bs'
@@ -20,11 +21,11 @@ const Welcome = () => {
     isLoading,
   } = useContext(TransactionContext)
 
-  const handleSubmit = (e) => {
-    // const { addressTo, amount, keyword, message } = formData;
-    // e.preventDefault();
-    // if (!addressTo || !amount || !keyword || !message) return;
-    // // sendTransaction();
+  const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
+    const { addressTo, amount, keyword, message } = formData
+    e.preventDefault()
+    if (!addressTo || !amount || !keyword || !message) return
+    sendTransaction()
   }
 
   return (
@@ -80,7 +81,10 @@ const Welcome = () => {
               </div>
             </div>
           </div>
-          <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism">
+          <form
+            className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism"
+            onSubmit={handleSubmit}
+          >
             <Input
               placeholder="Address To"
               name="addressTo"
@@ -112,14 +116,13 @@ const Welcome = () => {
               <Loader />
             ) : (
               <button
-                type="button"
-                onClick={handleSubmit}
+                type="submit"
                 className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
               >
                 Send now
               </button>
             )}
-          </div>
+          </form>
         </div>
       </div>
     </div>

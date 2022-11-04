@@ -1,11 +1,12 @@
 import React, { useEffect, useState, createContext } from 'react'
 import { ethers } from 'ethers'
+
 import { contractABI, contractAddress } from '../utils/constants'
-import { MetaMaskInpageProvider } from '@metamask/providers'
 
 interface TransactionContextInterface {
   connectWallet: () => Promise<void>
   connectedAccount: string
+  sedTransaction: () => Promise<void>
   formData: FormData
   handleChange: (e: React.ChangeEvent<HTMLInputElement>, name: string) => void
 }
@@ -28,7 +29,7 @@ const getEthereumContract = () => {
 }
 
 interface FormData {
-  adressTo: string
+  addressTo: string
   amount: string
   keyword: string
   message: string
@@ -39,7 +40,7 @@ interface TransactionProviderProps {
 export const TransactionProvider = ({ children }: TransactionProviderProps) => {
   const [connectedAccount, setConnectedAccount] = useState('')
   const [formData, setFormData] = useState<FormData>({
-    adressTo: '',
+    addressTo: '',
     amount: '',
     keyword: '',
     message: '',
@@ -71,30 +72,19 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
     }
   }
 
-  const connectWallet = async () => {
-    try {
-      if (!ethereum) return alert('Please install Metamask')
-
-      const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
-
-      setConnectedAccount(accounts[0])
-    } catch (err) {
-      console.log(err)
-
-      throw new Error('No ethereum account')
-    }
-  }
+  const connectWallet = async () => {}
 
   const sedTransaction = async () => {
-    try {
-      if (!ethereum) return alert('Please install Metamask')
-
-      // get data from the form
-    } catch (error) {
-      console.log(error)
-
-      throw new Error('No ethereum account')
-    }
+    const { addressTo, amount, keyword, message } = formData
+    const transactionContract = getEthereumContract()
+    console.log(transactionContract)
+    // try {
+    //   if (!ethereum) return alert('Please install Metamask')
+    //   // get data from the form
+    // } catch (error) {
+    //   console.log(error)
+    //   throw new Error('No ethereum account')
+    // }
   }
   useEffect(() => {
     checkIfWalletIsConnected()
@@ -105,6 +95,7 @@ export const TransactionProvider = ({ children }: TransactionProviderProps) => {
       value={{
         connectWallet,
         connectedAccount,
+        sedTransaction,
         formData,
         handleChange,
       }}
